@@ -46,41 +46,30 @@ public class StravaWebhookServer {
 
     }
     public static void main(String[] args) {
-        port(4567);
+
+        port(Integer.parseInt(System.getenv().getOrDefault("PORT", "4567")));
 
         get("/webhook", (req, res) -> {
+
             String challenge = req.queryParams("hub.challenge");
 
             if (challenge != null) {
+
                 JSONObject json = new JSONObject();
                 json.put("hub.challenge", challenge);
+
                 res.type("application/json");
+
                 return json.toString();
             }
-            return "Webhook activoo";
+
+            return "Webhook activo";
         });
 
         post("/webhook", (req, res) -> {
 
-            JSONObject json = new JSONObject(req.body());
-
-            if (json.getString("aspect_type").equals("create")) {
-
-                long activityId = json.getLong("object_id");
-
-                System.out.println("Nueva actividad detectada: " + activityId);
-
-                new Thread(() -> {
-
-                    try {
-                        Thread.sleep(30000); // esperar 30 segundos
-                        cambiarTitulo(activityId);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }).start();
-            }
+            System.out.println("Evento recibido:");
+            System.out.println(req.body());
 
             return "OK";
         });
