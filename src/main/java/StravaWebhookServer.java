@@ -55,15 +55,12 @@ public class StravaWebhookServer {
 
             if (challenge != null) {
 
-                JSONObject json = new JSONObject();
-                json.put("hub.challenge", challenge);
-
                 res.type("application/json");
 
-                return json.toString();
+                return "{\"hub.challenge\":\"" + challenge + "\"}";
             }
 
-            return "Webhook activo";
+            return "OK";
         });
 
         post("/webhook", (req, res) -> {
