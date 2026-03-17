@@ -1,3 +1,5 @@
+package org.example;
+
 import static spark.Spark.*;
 import org.json.JSONObject;
 
