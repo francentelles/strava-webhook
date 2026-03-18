@@ -14,7 +14,7 @@ public class StravaWebhookServer {
     static void cambiarTitulo(long activityId) {
 
         try {
-            String accessToken = "816d0b3c83cb1b8015d89812adba9711c610609a";
+            String accessToken = "fa7ef2b85387c00d5d36ac75c78fdbcc440a490c";
             String nuevoTitulo = tituloRandom();
             String url = "https://www.strava.com/api/v3/activities/" + activityId;
 
